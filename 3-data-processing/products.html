@@ -62,7 +62,16 @@
         console.log("---------------------")
         console.log("PART 1...")
 
-
+        console.log("Total number of products:", products.length)
+        products.forEach(function(product) {
+            console.log("Name:", product.name)
+            console.log("Price:", product.price)
+        })
+        var matchingProducts = products.filter(function(product) {
+            return product.price < 50
+        })
+        console.log("Total number of matching products:", matchingProducts.length)
+        
 
 
 
