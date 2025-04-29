@@ -47,6 +47,11 @@
     </p>
 
 
+    <input id="input-balance" type="number" placeholder="150000" value="150000"></input>
+    <input id="input-target" type="number" placeholder="1000000" value="1000000"></input>
+    <input id="input-mean" type="number" placeholder="0.08" value="0.08"></input>
+    <input id="input-stddev" type="number" placeholder="0.15" value="0.15"></input>
+    <button id="Calculate">Calculate</button>
 
     <script src="https://cdn.jsdelivr.net/npm/d3-random@3"></script>
     <script type="text/javascript">
@@ -96,7 +101,40 @@
         console.log("---------------------")
         console.log("PART 3...")
 
+        <!--
+                    var inputBalance = document.getElementById("input-balance")
+                var inputTarget = document.getElementById("input-target")
+                var inputMean = document.getElementById("input-mean")
+                var inputStdDev = document.getElementById("input-stddev")
+                var year = 0
+                var rateGenerator = d3.randomNormal(inputMean, inputStdDev)
+                var button = document.getElementById("Calculate")
+                button.addEventListener("click", function() {
+                    while(inputBalance.value < inputTarget.value){
+                        // annual return
+                        var rate = rateGenerator()
+                        var balance = parseFloat(inputBalance.value)
+                        var target = parseFloat(inputTarget.value)
+                        var mean = parseFloat(inputMean.value)
+                        var stddev = parseFloat(inputStdDev.value)
+                        year = year + 1
+                        balance = balance * (1 + rate)
+                        console.log(year, balance) // for each year
+                    }
+                })     
+        -->    
+        
+        //while(inputBalance < inputTarget){
+            // annual return
+        //    var rate = rateGenerator()
+       //     year = year + 1
+        //    inputBalance = inputBalance * (1 + rate)
+         //   console.log(year, inputBalance) // for each year
+        //}
 
+        
+
+    
 
 
     </script>
