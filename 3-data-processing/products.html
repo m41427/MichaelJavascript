@@ -79,7 +79,40 @@
         console.log("---------------------")
         console.log("PART 2...")
 
+        const container = document.getElementById("display-products");
+        products.forEach(product => {
+        // Create a new div for each product
+        const productDiv = document.createElement("div");
 
+        // Create and append product name
+        const nameP = document.createElement("p");
+        nameP.textContent = "Name: " + product.name;
+        productDiv.appendChild(nameP);
+
+        // Create and append description
+        const descP = document.createElement("p");
+        descP.textContent = "Description: " + product.description;
+        productDiv.appendChild(descP);
+
+        // Create and append price
+        const priceP = document.createElement("p");
+        priceP.textContent = "Price: $" + product.price.toFixed(2);
+        productDiv.appendChild(priceP);
+
+        // Create and append image
+        const img = document.createElement("img");
+        img.src = product.imageURL;
+        img.alt = product.name;
+        productDiv.appendChild(img);
+
+        // Append horizontal line
+        const hr = document.createElement("hr");
+        productDiv.appendChild(hr);
+
+        // Append the product div to the container
+        container.appendChild(productDiv);
+    });
+</script>
 
 
     </script>
