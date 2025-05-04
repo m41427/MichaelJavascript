@@ -101,7 +101,7 @@
         console.log("---------------------")
         console.log("PART 3...")
 
-        <!--
+        
                     var inputBalance = document.getElementById("input-balance")
                 var inputTarget = document.getElementById("input-target")
                 var inputMean = document.getElementById("input-mean")
@@ -122,15 +122,15 @@
                         console.log(year, balance) // for each year
                     }
                 })     
-        -->    
+           
         
-        //while(inputBalance < inputTarget){
-            // annual return
-        //    var rate = rateGenerator()
-       //     year = year + 1
-        //    inputBalance = inputBalance * (1 + rate)
-         //   console.log(year, inputBalance) // for each year
-        //}
+        while(inputBalance < inputTarget){
+            //annual return
+        var rate = rateGenerator()
+       year = year + 1
+        inputBalance = inputBalance * (1 + rate)
+         console.log(year, inputBalance) // for each year
+        }
 
         
 
