@@ -102,7 +102,20 @@
         console.log("---------------------")
         console.log("PART 1...")
 
+            // Display the screen name of the user who authored the first tweet
+            console.log(tweets[0].user.screen_name);
 
+            // Display the screen name of users who authored tweets containing "@sandwoah"
+            tweets
+                .filter(tweet => tweet.full_text.includes("@sandwoah"))
+                .forEach(tweet => console.log(tweet.user.screen_name));
+
+            // Find the tweet with the greatest number of likes among those containing "@sandwoah"
+            const mostLikedTweet = tweets
+                .filter(tweet => tweet.full_text.includes("@sandwoah"))
+                .reduce((max, tweet) => tweet.likes_count > max.likes_count ? tweet : max, { likes_count: 0 });
+
+            console.log(mostLikedTweet.user.screen_name);
 
 
 

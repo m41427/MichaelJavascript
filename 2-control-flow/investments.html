@@ -101,37 +101,49 @@
         console.log("---------------------")
         console.log("PART 3...")
 
-        
-                    var inputBalance = document.getElementById("input-balance")
-                var inputTarget = document.getElementById("input-target")
-                var inputMean = document.getElementById("input-mean")
-                var inputStdDev = document.getElementById("input-stddev")
-                var year = 0
-                var rateGenerator = d3.randomNormal(inputMean, inputStdDev)
-                var button = document.getElementById("Calculate")
-                button.addEventListener("click", function() {
-                    while(inputBalance.value < inputTarget.value){
-                        // annual return
-                        var rate = rateGenerator()
-                        var balance = parseFloat(inputBalance.value)
-                        var target = parseFloat(inputTarget.value)
-                        var mean = parseFloat(inputMean.value)
-                        var stddev = parseFloat(inputStdDev.value)
-                        year = year + 1
-                        balance = balance * (1 + rate)
-                        console.log(year, balance) // for each year
-                    }
-                })     
-           
-        
-        while(inputBalance < inputTarget){
-            //annual return
-        var rate = rateGenerator()
-       year = year + 1
-        inputBalance = inputBalance * (1 + rate)
-         console.log(year, inputBalance) // for each year
-        }
+            //Disclaimer: Edited with Copilot for improved functionality -Michael F
+            document.getElementById("Calculate").addEventListener("click", function () {
+                // Get user inputs
+                var initialBalance = parseFloat(document.getElementById("input-balance").value);
+                var targetBalance = parseFloat(document.getElementById("input-target").value);
+                var mean = parseFloat(document.getElementById("input-mean").value);
+                var stddev = parseFloat(document.getElementById("input-stddev").value);
 
+                // Validate inputs
+                if (isNaN(initialBalance) || isNaN(targetBalance) || isNaN(mean) || isNaN(stddev)) {
+                    alert("Please enter valid numbers for all fields.");
+                    return;
+                }
+
+                // Initialize variables
+                var balance = initialBalance;
+                var year = 0;
+                var rateGenerator = d3.randomNormal(mean, stddev);
+                var log = [];
+
+                // Simulation loop
+                while (balance < targetBalance) {
+                    var rate = rateGenerator();
+                    balance = balance * (1 + rate);
+                    year++;
+                    log.push(`Year ${year}: Rate = ${(rate * 100).toFixed(2)}%, Balance = ${formatUSD(balance)}`);
+                }
+
+                // Display results
+                var resultDiv = document.createElement("div");
+                resultDiv.innerHTML = `
+                    <p>Simulation Complete!</p>
+                    <p>Years: ${year}</p>
+                    <p>Ending Balance: ${formatUSD(balance)}</p>
+                    <p>Details:</p>
+                    <pre>${log.join("\n")}</pre>
+                `;
+                document.body.appendChild(resultDiv);
+            });
+        
+       
+            //annual return
+       
         
 
     
