@@ -90,7 +90,8 @@
 
         // FUNCTION DEFINITION
         function lookupCompany() {
-            var symbol = inputSymbol.value
+            var symbol = document.getElementById("input-symbol").value
+            var lookupButton = document.getElementById("lookup")
             console.log("SYMBOL:", symbol)
 
             var requestUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`
@@ -100,15 +101,31 @@
                 console.log("---------------------")
                 console.log("PART 1...")
 
-
-
+                // A. Fetch the company data using the provided URL (already done above).
+                // B. Display the name, description, and website URL of the company.
+                console.log("Company Name:", data.Name)
+                console.log("Company Description:", data.Description)
+                console.log("Company Website:", data.Website)
+                console.log("Company Symbol:", data.Symbol)
+                console.log("Company Sector:", data.Sector)
+                console.log("Company Industry:", data.Industry)
+                
 
 
 
                 console.log("---------------------")
                 console.log("PART 2...")
 
+                // Display the company's name in the provided span element
+                document.getElementById("display-name").textContent = data.Name;
 
+                // Display the company's description in the provided span element
+                document.getElementById("display-description").textContent = data.Description;
+
+                // Display a hyperlink to the company's website in the provided a element
+                var websiteLink = document.getElementById("display-link");
+                websiteLink.textContent = data.OfficialSite;
+                websiteLink.href = data.OfficialSite;
 
 
 
@@ -116,12 +133,12 @@
                 console.error("ERROR:", error)
             })
         }
-
+       
         // FUNCTION INVOCATIONS
         // invoke function when the page loads:
-        //lookupCompany()
+        lookupCompany()
         // invoke function when button is clicked:
-        //lookupButton.addEventListener("click", lookupCompany, false)
+        lookupButton.addEventListener("click", lookupCompany, false)
 
     </script>
 </body>

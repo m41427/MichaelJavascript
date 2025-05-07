@@ -84,7 +84,7 @@
         }
 
 
-        var symbol = "NFLX" // one of: [AAPL, GOOGL, MSFT, NFLX, NVDA, SPOT]
+        var symbol = "AAPL" // one of: [AAPL, GOOGL, MSFT, NFLX, NVDA, SPOT]
         var filename = `daily_adjusted_${symbol}.csv`
         var requestUrl = `https://raw.githubusercontent.com/prof-rossetti/intro-software-dev-python-book/refs/heads/main/docs/data/${filename}`
 
@@ -94,14 +94,33 @@
             console.log("---------------------")
             console.log("PART 1...")
 
+            // D. Display the number of days in the provided data
+            console.log("Number of Days:", data.length);
 
+            // E. Display the date and adjusted closing price on the earliest day
+            var earliestDay = data[0];
+            console.log("Earliest Day:", earliestDay.timestamp, formatUSD(parseFloat(earliestDay.adjusted_close)));
+
+            // F. Display the date and adjusted closing price on the latest day
+            var latestDay = data[data.length - 1];
+            console.log("Latest Day:", latestDay.timestamp, formatUSD(parseFloat(latestDay.adjusted_close)));
+
+            // G. Calculate the overall percent change in adjusted closing price from the earliest to the latest day
+            var earliestPrice = parseFloat(earliestDay.adjusted_close);
+            var latestPrice = parseFloat(latestDay.adjusted_close);
+            var percentChange = ((latestPrice - earliestPrice) / earliestPrice);
+            console.log("Percent Change:", formatPct(percentChange));
 
 
 
             console.log("---------------------")
             console.log("PART 2...")
 
-
+            
+            document.getElementById("display-symbol").textContent = symbol;
+            document.getElementById("display-earliest").textContent = `${earliestDay.timestamp} (${formatUSD(earliestPrice)})`;
+            document.getElementById("display-latest").textContent = `${latestDay.timestamp} (${formatUSD(latestPrice)})`;
+            document.getElementById("display-pct-change").textContent = formatPct(percentChange);
 
 
 

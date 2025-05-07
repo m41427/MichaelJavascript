@@ -64,7 +64,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script type="text/javascript">
 
-        var requestUrl = "TODO"
+        var requestUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
 
         d3.json(requestUrl).then(function(data){
             console.log("DATA:", data)
@@ -73,14 +73,46 @@
             console.log("---------------------")
             console.log("PART 1...")
 
+            // Part 1C: Display the number of non-alcoholic drinks
+            console.log("Number of non-alcoholic drinks:", data.drinks.length);
 
+            // Part 1D: Loop through the drinks and display their names and IDs
+            data.drinks.forEach(function(drink) {
+                console.log("Drink Name:", drink.strDrink, "| Drink ID:", drink.idDrink);
+            });
 
 
 
             console.log("---------------------")
             console.log("PART 2...")
 
+            // Part 2A: Display the number of drinks in the span element
+            document.getElementById("display-drinks-count").textContent = data.drinks.length;
 
+            // Part 2B: Loop through the drinks and display their name and image
+            var drinksContainer = document.getElementById("display-drinks");
+
+            data.drinks.forEach(function(drink) {
+                // Create a new child div element
+                var drinkDiv = document.createElement("div");
+
+                // Create a p tag for the drink name
+                var drinkName = document.createElement("p");
+                drinkName.textContent = drink.strDrink;
+
+                // Create an img tag for the drink image
+                var drinkImage = document.createElement("img");
+                drinkImage.src = drink.strDrinkThumb;
+                drinkImage.alt = drink.strDrink;
+                drinkImage.style.height = "100px";
+
+                // Append the p and img tags to the child div
+                drinkDiv.appendChild(drinkName);
+                drinkDiv.appendChild(drinkImage);
+
+                // Append the child div to the drinks container
+                drinksContainer.appendChild(drinkDiv);
+            });
 
 
         })

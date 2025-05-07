@@ -90,14 +90,74 @@
                 console.log("---------------------")
                 console.log("PART 1...")
 
+                // A. Fetch the weather data using the provided URL (already done above).
 
+                // B. Display the date this data was generated.
+                console.log("Date Generated:", data.properties.updated);
+
+                // C. Display the number of periods of available data.
+                console.log("Number of Periods:", data.properties.periods.length);
+
+                // D. Use a filtering operation to arrive at a subset of the periods that are daytime only.
+                var daytimePeriods = data.properties.periods.filter(period => period.isDaytime);
+
+                // E. Display the number of daytime periods.
+                console.log("Number of Daytime Periods:", daytimePeriods.length);
+
+                // F. For each daytime period, display a human-readable weather forecast.
+                daytimePeriods.forEach(period => {
+                    console.log(`Period: ${period.name}`);
+                    console.log(`Temperature: ${period.temperature}${degreeSymbol} ${period.temperatureUnit}`);
+                    console.log(`Forecast: ${period.detailedForecast}`);
+                    console.log("---------------------");
+                });
 
 
                 console.log("---------------------")
                 console.log("PART 2...")
 
 
+                // A. Display the date this data was generated.
+                document.getElementById("display-date").textContent = data.properties.updated;
 
+                // B. Display a seven day forecast, using the daytime periods only.
+                var forecastTable = document.getElementById("display-forecast");
+
+                // Create table headers
+                var headerRow = document.createElement("tr");
+                ["Period", "Temperature", "Forecast", "Icon"].forEach(headerText => {
+                    var th = document.createElement("th");
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                });
+                forecastTable.appendChild(headerRow);
+
+                // Populate table rows with daytime periods
+                daytimePeriods.forEach(period => {
+                    var row = document.createElement("tr");
+
+                    var periodCell = document.createElement("td");
+                    periodCell.textContent = period.name;
+                    row.appendChild(periodCell);
+
+                    var tempCell = document.createElement("td");
+                    tempCell.textContent = `${period.temperature}${degreeSymbol} ${period.temperatureUnit}`;
+                    row.appendChild(tempCell);
+
+                    var forecastCell = document.createElement("td");
+                    forecastCell.textContent = period.detailedForecast;
+                    row.appendChild(forecastCell);
+
+                    var iconCell = document.createElement("td");
+                    var iconImg = document.createElement("img");
+                    iconImg.src = period.icon;
+                    iconImg.alt = `${period.name} icon`;
+                    iconImg.style.width = "50px"; // Optional: Adjust size
+                    iconCell.appendChild(iconImg);
+                    row.appendChild(iconCell);
+
+                    forecastTable.appendChild(row);
+                });
 
             })
             .catch(err => console.log(err))

@@ -86,7 +86,25 @@
                 console.log("---------------------")
                 console.log("PART 1...")
 
+        
+                console.log(data.length)
 
+                data.forEach(function(movie) {
+    //console.log("---")
+    //console.log(movie)
+                console.log(movie.Title, movie.Year)
+})
+
+// sort the movies by rating in descending order
+// so the movie with the highest rating is first
+// then we can grab the first item from the sorted array
+// and that will be the one with the highest rating
+            var sortedMovies = data.sort(function(a, b) {
+    return d3.descending(a.Rating, b.Rating)
+})
+
+            var highestRated = sortedMovies[0]
+            console.log("HIGHEST RATED:", highestRated.Title, highestRated.Rating)
 
 
 
@@ -94,7 +112,46 @@
                 console.log("---------------------")
                 console.log("PART 2...")
 
+                // A.
+                let dropdown = document.getElementById("select-movie");
+                data.forEach(movie => {
+                    let option = document.createElement("option");
+                    option.value = movie.Id;
+                    option.textContent = movie.Title;
+                    dropdown.appendChild(option);
+                });
 
+                // B. 
+                function updateMovieInfo() {
+                    let selectedId = dropdown.value;
+                    let selectedMovie = data.find(movie => movie.Id === selectedId);
+
+                    if (selectedMovie) {
+                        document.getElementById("display-title").textContent = selectedMovie.Title;
+                        document.getElementById("display-year").textContent = selectedMovie.Year;
+                        document.getElementById("display-rating").textContent = selectedMovie.Rating;
+
+                        let imageContainer = document.getElementById("image-container");
+                        imageContainer.innerHTML = ""; // Clear any existing image
+                        let img = document.createElement("img");
+                        img.src = selectedMovie["Thumbnail Image URL"];
+                        img.alt = `${selectedMovie.Title} Thumbnail`;
+                        imageContainer.appendChild(img);
+                    }
+                }
+
+                // C.
+                dropdown.addEventListener("change", updateMovieInfo);
+
+              
+                
+
+               
+
+
+
+
+              
 
 
 
